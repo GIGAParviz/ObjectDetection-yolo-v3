@@ -13,7 +13,10 @@ yolo_net = cv.dnn.readNet('yolov3.weights' , 'yolov3.cfg')
 layer_names = yolo_net.getLayerNames()
 output_layers = [layer_names[i - 1] for i in yolo_net.getUnconnectedOutLayers()]
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture('Test Videos/1.mp4')
+# if you want it for live video(on youre webcam):
+# cap = cv.VideoCapture(0)
+
 new_width = 20000 
 new_height = 20000
 cap.set(cv.CAP_PROP_FRAME_WIDTH, new_width)
