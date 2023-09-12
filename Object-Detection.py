@@ -4,16 +4,10 @@ import numpy as np
 from  tensorflow import keras
 
 
-
 classes = []
 with open("coco.names", "r") as f:
     classes = [line.strip() for line in f.readlines()]
-
 yolo_net = cv.dnn.readNet('yolov3.weights' , 'yolov3.cfg')
-
-
-
-
 
 
 layer_names = yolo_net.getLayerNames()
@@ -63,14 +57,15 @@ while(cap.isOpened()):
         font = cv.FONT_HERSHEY_PLAIN
         for i in range(len(boxes)):
             if i in indexes:
-                if classes[class_ids[i]] == "person":
+                # if you want you can choose what exacly detect like person only
+                #if classes[class_ids[i]] == "person":
                     x, y, w, h = boxes[i]
                     label = str(classes[class_ids[i]])
                     color = (0,0,255)
                     cv.rectangle(img, (x, y), (x + w, y + h), color, 2)
                     cv.putText(img, label, (x, y + 30), font, 2, color, 2 )
                     
-                    # ذخیره عکس با شماره فریم
+                    # saving photo's when detect
                     if label == "person":
                         # frame_file_name = 'Faces\frame_{frame_number}.jpg'
                         with open('Faces\person_{}.png'.format(frame_number), "wb") as f:
